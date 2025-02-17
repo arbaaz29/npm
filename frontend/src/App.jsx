@@ -17,7 +17,7 @@ const NoteKeeper = () => {
   const fetchNotes = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:5000/api/notes');
+      const response = await fetch('/api/notes');
       if (!response.ok) throw new Error('Failed to fetch notes');
       const data = await response.json();
       setNotes(data);
@@ -35,7 +35,7 @@ const NoteKeeper = () => {
     try {
       setIsLoading(true);
       if (isEditing) {
-        const response = await fetch(`http://localhost:5000/api/notes/${currentNote._id}`, {
+        const response = await fetch(`/api/notes/${currentNote._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const NoteKeeper = () => {
         if (!response.ok) throw new Error('Failed to update note');
         await fetchNotes();
       } else {
-        const response = await fetch('http://localhost:5000/api/notes', {
+        const response = await fetch('/api/notes', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const NoteKeeper = () => {
   const handleDeleteNote = async (id) => {
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5000/api/notes/${id}`, {
+      const response = await fetch(`/api/notes/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Failed to delete note');
