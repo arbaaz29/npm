@@ -36,7 +36,9 @@ pipeline {
                     }
                 }
             }
+        }
 
+        stage('Quality Gate') {
             steps {
                 withCredentials([string(credentialsId: 'sonarqube_token', variable: 'tkn')]) {
                     withSonarQubeEnv('SonarQube') {
