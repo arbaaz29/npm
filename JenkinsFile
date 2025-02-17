@@ -1,9 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'arbaazij/docker-nodejs'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-        }
+    agent any
+    tools{
+        jdk 'jdk'
+        nodejs 'nodejs'
     }
     environment {
         SONAR_SCANNER_HOME = tool 'sonar_scanner'
