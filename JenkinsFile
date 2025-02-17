@@ -6,9 +6,5 @@ pipeline {
                 git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/npm.git'
             }
         }
-        //   stage('SonarQube'){
-        //   }
-        //   stage('unit test'){
-        //   }
     }
 }
