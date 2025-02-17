@@ -1,9 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'arbaazij/dnj'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner:/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner'
-        }
+    agent any
+    tools{
+        jdk 'jdk'
+        nodejs 'nodejs'
     }
     environment {
         SONAR_SCANNER_HOME = tool 'sonar_scanner'
