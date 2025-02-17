@@ -5,15 +5,17 @@ pipeline{
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
-  stages('checkout'){
-    steps {
+  stages{
+    stage('checkout'){
+        steps {
         git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/npm.git'
+        }
     }
-  }
-//   stage('SonarQube'){
+    //   stage('SonarQube'){
 
 //   }
 //   stage('unit test'){
 
 //   }
+  }
 }
