@@ -5,14 +5,32 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
         }
     }
+    environment {
+        SONAR_SCANNER_HOME = tool 'sonarqubescanner'
+        SONAR_PROJECT_KEY = 'npm'
+        
+    }
     stages {
         stage('checkout') {
             steps {
                 git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/npm.git'
             }
         }
-        //   stage('SonarQube'){
-        //   }
+        stage('SonarQube'){
+            steps{
+                withCredentials([string(credentialsId: 'sonarqube_token', variable: 'tkn')]) {
+                    withSonarQubeEnv ('sonarqube'){
+                        sh """
+                        ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
+                        -Dsonar.projectkey=${SONAR_PROJECT_KEY} \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=${SONAR_HOST}\
+                        -Dsonar.login=${tkn}
+                        """
+                    }
+                }
+            }
+        }
         //   stage('unit test'){
         //   }
     }
