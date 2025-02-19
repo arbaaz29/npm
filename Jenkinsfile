@@ -74,10 +74,12 @@ pipeline {
 
         stage('Docker Image Build') {
             steps {
-                dir('App-files/backend'){
-                   sh 'docker system prune -f'
-                   sh 'docker container prune -f'
-                   sh 'docker build -st ${DOCKERHUB_REPO} .'
+                script {
+                    dir('App-files/backend'){
+                        sh 'docker system prune -f'
+                        sh 'docker container prune -f'
+                        sh 'docker build -st ${DOCKERHUB_REPO} .'
+                    }
                 }
             }
         }
