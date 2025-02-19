@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/npm.git'
+                git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/pipeline.git'
             }
         }
 
