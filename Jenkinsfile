@@ -69,8 +69,10 @@ pipeline {
 
         stage('Docker Image Build') {
             steps {
-                script {
-                    docker.build("${DOCKERHUB_REPO}:latest")
+                dir('App-files/backend'){
+                    script {
+                        docker.build("${DOCKERHUB_REPO}:latest")
+                    }
                 }
             }
         }
