@@ -75,9 +75,9 @@ pipeline {
         stage('Docker Image Build') {
             steps {
                 dir('App-files/backend'){
-                    script {
-                        docker.build("${DOCKERHUB_REPO}:latest", "--file Dockerfile .")
-                    }
+                   sh 'docker system prune -f'
+                   sh 'docker container prune -f'
+                   sh 'docker build 0t ${DOCKERHUB_REPO}:latest .'
                 }
             }
         }
