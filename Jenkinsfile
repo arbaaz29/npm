@@ -77,7 +77,7 @@ pipeline {
                 dir('App-files/backend'){
                    sh 'docker system prune -f'
                    sh 'docker container prune -f'
-                   sh 'docker build 0t ${DOCKERHUB_REPO}:latest .'
+                   sh 'docker build -st ${DOCKERHUB_REPO} .'
                 }
             }
         }
