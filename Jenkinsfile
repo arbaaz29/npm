@@ -14,6 +14,11 @@ pipeline {
     }
 
     stages {
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
         stage('Checkout') {
             steps {
                 git branch: 'main', credentialsId: 'Git-token', url: 'https://github.com/arbaaz29/npm.git'
@@ -71,7 +76,7 @@ pipeline {
             steps {
                 dir('App-files/backend'){
                     script {
-                        docker.build("${DOCKERHUB_REPO}:latest")
+                        docker.build("${DOCKERHUB_REPO}:latest", "--file Dockerfile .")
                     }
                 }
             }
