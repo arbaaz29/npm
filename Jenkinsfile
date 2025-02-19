@@ -76,6 +76,8 @@ pipeline {
             steps {
                 script {
                     dir('App-files/backend'){
+                        sh 'docker --version'
+                        sh 'ls -al'
                         sh 'docker system prune -f'
                         sh 'docker container prune -f'
                         sh 'docker build -st ${DOCKERHUB_REPO} .'
@@ -86,7 +88,7 @@ pipeline {
 
         stage('Trivy Image Scan') {
             steps {
-                sh 'trivy --severity HIGH,CRITICAL --no-progress --format table -o trivy-report.html image ${DOCKERHUB_REPO}:latest'
+                sh 'trivy --severity HIGH,CRITICAL --no-progress --format table -o trivy-report.html image ${DOCKERHUB_REPO}'
             }
         }
 
